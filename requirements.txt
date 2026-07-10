@@ -1,3 +1,0 @@
-inflect
-maskpass
-termcolor

@@ -1,0 +1,11 @@
+[project]
+name = "hangman-p"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "inflect>=7.5.0",
+    "maskpass>=0.3.7",
+    "termcolor>=3.3.0",
+]
