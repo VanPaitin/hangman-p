@@ -1,6 +1,6 @@
 from random import choice
-from project import game_actions, get_level, get_challenger
-import level
+from hangman_p.project import game_actions, get_level, get_challenger
+from hangman_p import level
 
 
 

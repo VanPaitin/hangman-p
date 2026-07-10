@@ -1,4 +1,4 @@
-from hangman_p.project import main
+from .project import main
 
 
 if __name__ == "__main__":

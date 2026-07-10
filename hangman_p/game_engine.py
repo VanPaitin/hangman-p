@@ -1,8 +1,8 @@
 from sys import exit
 from termcolor import colored
 from inflect import engine
-from messages import Message
-from utilities import get_valid_choice, get_validated_input, VALID
+from .messages import Message
+from .utilities import get_valid_choice, get_validated_input, VALID
 
 
 inflector = engine()
@@ -141,5 +141,4 @@ class GameEngine:
         ).lower() in ['q', 'quit']: exit('Goodbye!')
 
 
-from game_persistence import GamePersistence
-
+from .game_persistence import GamePersistence

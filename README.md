@@ -20,13 +20,43 @@ This project demonstrates concepts such as object-oriented design, input validat
 
 ### Usage
 
-This game is a REPL game, i.e it is being played from and with the Terminal. To start it just run ```python project.py```
+This game is a REPL game, i.e it is being played from and with the Terminal.
+
+To run it locally from this repository:
+
+```bash
+python project.py
+```
+
+After installing it as a package, run:
+
+```bash
+hangman-p
+```
+
+You can also run it as a Python module:
+
+```bash
+python -m hangman_p
+```
+
+To build distribution files for publishing:
+
+```bash
+uv build
+```
+
+This creates a wheel and source distribution in `dist/`. To upload them to PyPI after configuring a PyPI API token:
+
+```bash
+uv publish
+```
 
 Once started, the game is very intuitive and easy to follow.
 
 ###"Welcome to Hangman, the no-nonsense game Be smart, then you live. if not, you'll have to die by Hanging. You have a couple of options to pick from..... Press 'P' or 'play' if you think you are ready for the challenge, You may press 'I' or 'instructions' for a short explanation of how to play You may continue a previously saved game by pressing 'L' or 'load' Or you could just quit by pressing a 'Q' or typing 'quit'" "The word to guess is represented by a row of dashes These dashes represent each letter of the word. Words you cannot use include proper nouns such as names, places, and brands. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions."
 
-The guessing player must guess all of the letters of the word within a limited amount of chances. Faiure to do so will result in his death by hanging.
+The guessing player must guess all of the letters of the word within a limited amount of chances. Failure to do so will result in his death by hanging.
 
 #### Important note
 In human mode, if the player is typing his word, it will not be displayed on the screen, it will be masked so as not to give the challenged player undue advantage.
@@ -41,12 +71,12 @@ In human mode, if the player is typing his word, it will not be displayed on the
 ### Project structure
 ```bash
 project.py                # Main entry point
-level.py                  # Difficulty configuration
-game_engine.py            # Core gameplay logic
-utilities.py              # Helper input validation utilities
-dictionary.txt            # list of possible words to be used (Computer mode)
-game_persistence.py       # Save/load game handling
-requirements.txt          # list of external libraries used
+hangman_p/level.py        # Difficulty configuration
+hangman_p/game_engine.py  # Core gameplay logic
+hangman_p/utilities.py    # Helper input validation utilities
+hangman_p/dictionary.txt  # list of possible words to be used (Computer mode)
+hangman_p/game_persistence.py # Save/load game handling
+pyproject.toml            # package metadata and dependencies
 test_project.py           # pytest file
 ```
 

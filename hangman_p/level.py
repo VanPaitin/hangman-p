@@ -1,8 +1,9 @@
+from importlib.resources import files
 from termcolor import colored
 from random import choice
 from maskpass import askpass
-from utilities import get_validated_input, VALID
-from game_engine import GameEngine
+from .utilities import get_validated_input, VALID
+from .game_engine import GameEngine
 
 class Level:
     config = {
@@ -36,7 +37,8 @@ class Level:
 
 
     def generate_word(self):
-        with open('dictionary.txt') as dictionary:
+        dictionary_path = files("hangman_p").joinpath("dictionary.txt")
+        with dictionary_path.open() as dictionary:
             return choice([line.rstrip() for line in dictionary if self.is_valid_length(line)])
 
 

@@ -2,11 +2,12 @@ from sys import exit
 from pathlib import Path
 import pickle
 from termcolor import colored
-from utilities import get_valid_choice
-from messages import Message
+from .utilities import get_valid_choice
+from .messages import Message
 
 class GamePersistence:
-    saved_games = Path(__file__).resolve().parent / 'saved_games.pkl'
+    save_dir = Path.home() / '.hangman-p'
+    saved_games = save_dir / 'saved_games.pkl'
 
     @classmethod
     def load_all(cls):
@@ -19,6 +20,7 @@ class GamePersistence:
 
     @classmethod
     def _save_all(cls):
+        cls.save_dir.mkdir(exist_ok=True)
         with open(cls.saved_games, 'wb') as games_file:
             pickle.dump(cls.engines, games_file)
 

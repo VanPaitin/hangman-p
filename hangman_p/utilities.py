@@ -1,6 +1,6 @@
 import re
-from messages import Message
 from inflect import engine
+from .messages import Message
 
 inflector = engine()
 
@@ -44,4 +44,3 @@ def get_valid_choice(choices, prompt='', case_sensitive=False):
         return VALID if entry in normalized else (False, error_message)
 
     return get_validated_input(validator)(prompt)
-
