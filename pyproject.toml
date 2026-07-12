@@ -4,11 +4,21 @@ version = "0.1.0"
 description = "A command-line Hangman game."
 readme = "README.md"
 requires-python = ">=3.10"
+authors = [
+    { name = "Mayowa Pitan" },
+]
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = [
     "inflect>=7.5.0",
     "maskpass>=0.3.7",
     "termcolor>=3.3.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/VanPaitin/hangman-p"
+Repository = "https://github.com/VanPaitin/hangman-p"
+Issues = "https://github.com/VanPaitin/hangman-p/issues"
 
 [build-system]
 requires = ["setuptools>=77.0.0"]
