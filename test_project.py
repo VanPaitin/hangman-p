@@ -126,7 +126,28 @@ def test_game_engine_validates_repeated_and_invalid_guesses():
 
     valid, error = engine.guess_validator("apple")
     assert valid is False
-    assert error == "Enter just one character please: "
+    assert error == "Enter one letter from A to Z: "
+
+    valid, error = engine.guess_validator("ab")
+    assert valid is False
+    assert error == "Enter one letter from A to Z: "
+
+    valid, error = engine.guess_validator("5")
+    assert valid is False
+    assert error == "Enter one letter from A to Z: "
+
+
+def test_game_engine_reveals_non_letters_and_ignores_them_for_winning():
+    engine = GameEngine(chances=9, game_word="catch-22", player="Mayowa")
+
+    assert engine.word_control == "_____-22"
+    assert engine.is_game_won is False
+
+    for guess in set("catch"):
+        engine._compare_guess(guess)
+
+    assert engine.word_control == "catch-22"
+    assert engine.is_game_won is True
 
 
 def test_level_generate_word_uses_packaged_dictionary(monkeypatch):

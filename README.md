@@ -15,6 +15,7 @@ This project demonstrates concepts such as object-oriented design, input validat
 * Game saving and loading
 * Automatic deletion of completed saved games
 * Input validation and error handling
+* Automatic display of numbers, spaces, and punctuation in hidden words
 * Automated unit tests using pytest
 * CLI-based interactive gameplay
 
