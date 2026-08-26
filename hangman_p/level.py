@@ -2,7 +2,8 @@ from importlib.resources import files
 from termcolor import colored
 from random import choice
 from maskpass import askpass
-from .utilities import get_validated_input, VALID
+from cli_input_validator import VALID, get_validated_input
+
 from .game_engine import GameEngine
 
 class Level:

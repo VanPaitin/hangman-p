@@ -1,11 +1,11 @@
 from random import choice
 import pytest
+from cli_input_validator import VALID, get_valid_choice, name_validator
 
 from hangman_p.game_engine import GameEngine
 from hangman_p.game_persistence import GamePersistence
 from hangman_p.project import game_actions, get_level, get_challenger
 from hangman_p import level
-from hangman_p.utilities import get_valid_choice, name_validator, VALID
 
 
 def test_game_actions():
@@ -88,7 +88,7 @@ def test_name_validator():
     valid, error = name_validator("Mayowa123")
 
     assert valid is False
-    assert "Please enter a real name" in error
+    assert "letters, spaces, or hyphens" in error
 
 
 def test_get_valid_choice_reprompts_until_valid(monkeypatch):

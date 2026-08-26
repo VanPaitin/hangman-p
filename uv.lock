@@ -3,6 +3,15 @@ revision = 3
 requires-python = ">=3.10"
 
 [[package]]
+name = "cli-input-validator"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/33/4c/227704bcc197bc5322a0f54a7c9173679aa674ff4707744e5f4b09ba2718/cli_input_validator-0.1.1.tar.gz", hash = "sha256:e3cfc7cd70e4140b407c602ef8242fc0ad726014ad7cdea7952c85a065e11a6e", size = 5457, upload-time = "2026-08-26T05:08:20.932Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3a/61/d35ccbafa708fa216503f7f4e11bf3d9a2ef21673f5f37efbd9b066529c5/cli_input_validator-0.1.1-py3-none-any.whl", hash = "sha256:37523370aa0ea073ccec0aac815d981a973645f0c8ae58473a66fdbf670474b4", size = 5521, upload-time = "2026-08-26T05:08:19.739Z" },
+]
+
+[[package]]
 name = "evdev"
 version = "1.9.3"
 source = { registry = "https://pypi.org/simple" }
@@ -13,6 +22,7 @@ name = "hangman-p"
 version = "0.1.2"
 source = { editable = "." }
 dependencies = [
+    { name = "cli-input-validator" },
     { name = "inflect" },
     { name = "maskpass" },
     { name = "termcolor" },
@@ -20,6 +30,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "cli-input-validator", specifier = ">=0.1.1,<0.2.0" },
     { name = "inflect", specifier = ">=7.5.0" },
     { name = "maskpass", specifier = ">=0.3.7" },
     { name = "termcolor", specifier = ">=3.3.0" },

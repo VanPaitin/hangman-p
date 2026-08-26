@@ -10,6 +10,7 @@ authors = [
 license = "MIT"
 license-files = ["LICENSE"]
 dependencies = [
+    "cli-input-validator>=0.1.1,<0.2.0",
     "inflect>=7.5.0",
     "maskpass>=0.3.7",
     "termcolor>=3.3.0",

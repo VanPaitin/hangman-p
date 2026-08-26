@@ -73,7 +73,6 @@ In human mode, if the player is typing his word, it will not be displayed on the
 project.py                # Main entry point
 hangman_p/level.py        # Difficulty configuration
 hangman_p/game_engine.py  # Core gameplay logic
-hangman_p/utilities.py    # Helper input validation utilities
 hangman_p/dictionary.txt  # list of possible words to be used (Computer mode)
 hangman_p/game_persistence.py # Save/load game handling
 pyproject.toml            # package metadata and dependencies
@@ -83,7 +82,7 @@ test_project.py           # pytest file
 ### Design Decisions
 * **Object-oriented structure:** I wasn't sure whether to use OOP or procedural paradigm. After thinking about what I will like to achieve, I decided that OOP was more convenient as it will handle game states more easily.
 * **Pickle-based persistence:** I had the option of shelve or json as well, but I decided to vote for pickle mainly because of its elegant serialization and deserialization of python objects
-* **Modular utilities:** This decision was made after I found that I was validating inputs in several places of the program. I decided to extract the logic to `utilities.py` to make input validation reusable and testable.
+* **Shared input validation:** Interactive input is validated with the reusable [`cli-input-validator`](https://pypi.org/project/cli-input-validator/) package.
 * **Pytest fixtures:** were used for automated testing of interactive functions by monkeypatching input/output.
 
 ### Author

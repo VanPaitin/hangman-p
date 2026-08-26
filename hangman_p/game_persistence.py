@@ -2,7 +2,8 @@ from sys import exit
 from pathlib import Path
 import pickle
 from termcolor import colored
-from .utilities import get_valid_choice
+from cli_input_validator import get_valid_choice
+
 from .messages import Message
 
 class GamePersistence:

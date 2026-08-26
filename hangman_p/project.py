@@ -1,6 +1,7 @@
 from sys import exit
+from cli_input_validator import get_valid_choice, get_valid_name
+
 from .messages import Message
-from .utilities import verify_name_integrity, get_valid_choice
 from .level import Level
 from .game_persistence import GamePersistence
 
@@ -14,7 +15,7 @@ def main():
 
     match choice:
         case "p" | "play":
-            name = verify_name_integrity(Message.game_intro()).capitalize()
+            name = get_valid_name(Message.game_intro()).capitalize()
             print(f'Hi {name}, ', end='')
 
             while True:
@@ -42,7 +43,7 @@ def get_level(name):
     if option == '2':
         level = Level(difficulty, name)
     else:
-        friend_name = verify_name_integrity(f'Please enter the name of your friend: ').capitalize()
+        friend_name = get_valid_name(f'Please enter the name of your friend: ').capitalize()
         print(f'Hello {name} and {friend_name}, who will like to challenge?')
         challenger = get_challenger(name, friend_name).capitalize()
         player = friend_name if name == challenger else name

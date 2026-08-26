@@ -1,8 +1,9 @@
 from sys import exit
 from termcolor import colored
 from inflect import engine
+from cli_input_validator import VALID, get_valid_choice, get_validated_input
+
 from .messages import Message
-from .utilities import get_valid_choice, get_validated_input, VALID
 
 
 inflector = engine()
