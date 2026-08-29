@@ -108,7 +108,8 @@ class GameEngine:
 
                     GamePersistence.save_game(self)
 
-                sys_exit(colored("Goodbye", "yellow"))
+                print(colored("Goodbye", "yellow"))
+                sys_exit(0)
         if len(guess) != 1 or guess not in ascii_lowercase:
             return (False, "Enter one letter from A to Z: ")
 
@@ -164,4 +165,5 @@ class GameEngine:
         if get_valid_choice(
             ["r", "restart", "q", "quit"], Message.end_games()
         ).lower() in ["q", "quit"]:
-            sys_exit("Goodbye!")
+            print("Goodbye!")
+            sys_exit(0)

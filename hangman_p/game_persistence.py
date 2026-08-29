@@ -37,7 +37,8 @@ class GamePersistence:
                 cls.engines.append(engine)
 
             cls._save_all()
-            sys_exit(colored("Goodbye, your game has been saved successfully", "green"))
+            print(colored("Goodbye, your game has been saved successfully", "green"))
+            sys_exit(0)
 
     @classmethod
     def load_game(cls):

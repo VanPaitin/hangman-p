@@ -185,6 +185,23 @@ def test_game_persistence_saves_and_deletes_games(tmp_path, monkeypatch):
     assert GamePersistence.load_all() == []
 
 
+def test_save_game_exits_successfully(tmp_path, monkeypatch, capsys):
+    engine = GameEngine(chances=5, game_word="apple", player="Mayowa")
+
+    monkeypatch.setattr(GamePersistence, "save_dir", tmp_path)
+    monkeypatch.setattr(GamePersistence, "saved_games", tmp_path / "saved_games.pkl")
+    monkeypatch.setattr(GamePersistence, "engines", [])
+    monkeypatch.setattr(
+        "hangman_p.game_persistence.get_valid_choice", lambda *_args, **_kwargs: "Yes"
+    )
+
+    with pytest.raises(SystemExit) as exit_info:
+        GamePersistence.save_game(engine)
+
+    assert exit_info.value.code == 0
+    assert "saved successfully" in capsys.readouterr().out
+
+
 def test_game_persistence_load_all_handles_missing_and_bad_files(tmp_path, monkeypatch):
     save_file = tmp_path / "saved_games.pkl"
 
@@ -200,3 +217,24 @@ def test_game_persistence_load_all_handles_missing_and_bad_files(tmp_path, monke
 def test_level_rejects_invalid_difficulty():
     with pytest.raises(ValueError, match="Invalid Value"):
         level.Level("4", "Mayowa")
+
+
+def test_normal_game_exits_use_success_status(monkeypatch, capsys):
+    engine = GameEngine(chances=5, game_word="apple", player="Mayowa")
+
+    with pytest.raises(SystemExit) as exit_info:
+        engine.guess_validator("quit")
+
+    assert exit_info.value.code == 0
+    assert "Goodbye" in capsys.readouterr().out
+
+    monkeypatch.setattr(
+        "hangman_p.game_engine.get_valid_choice", lambda *_args, **_kwargs: "quit"
+    )
+    monkeypatch.setattr(GamePersistence, "delete_game", lambda _engine: None)
+
+    with pytest.raises(SystemExit) as exit_info:
+        engine.end_game()
+
+    assert exit_info.value.code == 0
+    assert "Goodbye!" in capsys.readouterr().out
