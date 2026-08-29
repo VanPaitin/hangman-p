@@ -1,3 +1,5 @@
+"""Run Hangman with ``python -m hangman_p``."""
+
 from .project import main
 
 

@@ -1,11 +1,10 @@
-from sys import exit
+from sys import exit as sys_exit
+
 from cli_input_validator import get_valid_choice, get_valid_name
 
 from .messages import Message
 from .level import Level
 from .game_persistence import GamePersistence
-
-
 
 def main():
     choice = get_valid_choice(game_actions(), prompt=Message.welcome()).lower()
@@ -21,13 +20,26 @@ def main():
             while True:
                 play(name)
         case "q" | "quit":
-            exit()
+            sys_exit()
         case "l" | "load":
             load()
 
 
 def game_actions():
-    return ['p', 'P', 'play', 'i', 'I', 'instruction', 'q', 'Q', 'quit', 'l', 'L', 'load']
+    return [
+        "p",
+        "P",
+        "play",
+        "i",
+        "I",
+        "instruction",
+        "q",
+        "Q",
+        "quit",
+        "l",
+        "L",
+        "load",
+    ]
 
 
 # This technically begins the game
@@ -43,7 +55,7 @@ def get_level(name):
     if option == '2':
         level = Level(difficulty, name)
     else:
-        friend_name = get_valid_name(f'Please enter the name of your friend: ').capitalize()
+        friend_name = get_valid_name("Please enter the name of your friend: ").capitalize()
         print(f'Hello {name} and {friend_name}, who will like to challenge?')
         challenger = get_challenger(name, friend_name).capitalize()
         player = friend_name if name == challenger else name
@@ -51,21 +63,21 @@ def get_level(name):
 
     return level
 
-
-
 def get_challenger(name, friend_name):
-    return get_valid_choice([name, friend_name], f'Please enter one of your names ({name} or {friend_name}): ')
+    prompt = f"Please enter one of your names ({name} or {friend_name}): "
+    return get_valid_choice([name, friend_name], prompt)
 
 
 def load():
     try:
         engine = GamePersistence.load_game()
-    except ValueError as e: exit(e.args[0])
+    except ValueError as error:
+        sys_exit(error.args[0])
 
     engine.run()
     while True:
         play(engine.player)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

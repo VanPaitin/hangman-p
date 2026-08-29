@@ -19,17 +19,32 @@ This project demonstrates concepts such as object-oriented design, input validat
 * Automated unit tests using pytest
 * CLI-based interactive gameplay
 
-### Usage
+### Installation
 
-This game is a REPL game, i.e it is being played from and with the Terminal.
-
-To run it locally from this repository:
+To install the game with `uv`:
 
 ```bash
-python project.py
+uv tool install hangman-p
 ```
 
-After installing it as a package, run:
+This installs the game in an isolated environment and makes the `hangman-p`
+command available globally.
+
+You can also try the game without permanently installing it:
+
+```bash
+uvx --from hangman-p hangman-p
+```
+
+To install it into your active Python environment with `pip`:
+
+```bash
+python -m pip install hangman-p
+```
+
+### Usage
+
+Hangman is an interactive terminal game. After installation, start it with:
 
 ```bash
 hangman-p
@@ -39,18 +54,6 @@ You can also run it as a Python module:
 
 ```bash
 python -m hangman_p
-```
-
-To build distribution files for publishing:
-
-```bash
-uv build
-```
-
-This creates a wheel and source distribution in `dist/`. To upload them to PyPI after configuring a PyPI API token:
-
-```bash
-uv publish
 ```
 
 Once started, the game is very intuitive and easy to follow.
@@ -85,6 +88,34 @@ test_project.py           # pytest file
 * **Pickle-based persistence:** I had the option of shelve or json as well, but I decided to vote for pickle mainly because of its elegant serialization and deserialization of python objects
 * **Shared input validation:** Interactive input is validated with the reusable [`cli-input-validator`](https://pypi.org/project/cli-input-validator/) package.
 * **Pytest fixtures:** were used for automated testing of interactive functions by monkeypatching input/output.
+
+### Contributing
+
+Contributions are welcome. You do not need to build or publish distribution
+files to contribute.
+
+1. Fork the repository on GitHub and clone your fork.
+2. Create a branch for your change:
+
+```bash
+git switch -c feature/your-change
+```
+
+3. Install the project dependencies and run the game locally:
+
+```bash
+uv sync
+uv run hangman-p
+```
+
+4. Run the tests before submitting your change:
+
+```bash
+uv run --with pytest pytest
+```
+
+5. Commit your changes, push your branch, and open a pull request against the
+   `main` branch of this repository.
 
 ### Author
 Mayowa Pitan

@@ -1,9 +1,9 @@
-from sys import exit
 from string import ascii_lowercase
+from sys import exit as sys_exit
 
-from termcolor import colored
-from inflect import engine
 from cli_input_validator import VALID, get_valid_choice, get_validated_input
+from inflect import engine
+from termcolor import colored
 
 from .messages import Message
 
@@ -81,7 +81,8 @@ class GameEngine:
             self._compare_guess(guess.lower())
             print(self.ui_word_control)
             if self.is_game_won:
-                return self.win_game()
+                self.win_game()
+                return
 
             remaining = self._chances - self.attempts
             print(f'You have {remaining} {inflector.plural("chance", remaining)} left')
@@ -101,9 +102,13 @@ class GameEngine:
                 return (False, self._guess_prompt)
             case "quit" | ":q":
                 if self._can_save:
+                    from .game_persistence import (  # pylint: disable=import-outside-toplevel
+                        GamePersistence,
+                    )
+
                     GamePersistence.save_game(self)
 
-                exit(colored("Goodbye", "yellow"))
+                sys_exit(colored("Goodbye", "yellow"))
         if len(guess) != 1 or guess not in ascii_lowercase:
             return (False, "Enter one letter from A to Z: ")
 
@@ -123,7 +128,8 @@ class GameEngine:
     def __str__(self):
         return (
             f"{self._player}  ===>>>     {self.ui_word_control}\n"
-            f"\t{self._chances - self.attempts} chances left and you have used {inflector.join(list(self._misses))}"
+            f"\t{self._chances - self.attempts} chances left and you have used "
+            f"{inflector.join(list(self._misses))}"
         )
 
     def win_game(self):
@@ -149,12 +155,13 @@ class GameEngine:
         self.end_game()
 
     def end_game(self):
+        from .game_persistence import (  # pylint: disable=import-outside-toplevel
+            GamePersistence,
+        )
+
         GamePersistence.delete_game(self)
 
         if get_valid_choice(
             ["r", "restart", "q", "quit"], Message.end_games()
         ).lower() in ["q", "quit"]:
-            exit("Goodbye!")
-
-
-from .game_persistence import GamePersistence
+            sys_exit("Goodbye!")

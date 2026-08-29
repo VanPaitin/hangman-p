@@ -30,3 +30,13 @@ hangman-p = "hangman_p.project:main"
 
 [tool.setuptools.package-data]
 hangman_p = ["dictionary.txt"]
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+]
+
+[tool.pylint.design]
+max-attributes = 8

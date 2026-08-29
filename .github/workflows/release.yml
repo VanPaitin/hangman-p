@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/pylint.yml
+
+  build:
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+
+      - name: Verify tag matches package version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+
+          with open("pyproject.toml", "rb") as pyproject_file:
+              version = tomllib.load(pyproject_file)["project"]["version"]
+
+          expected_tag = f"v{version}"
+          actual_tag = os.environ["RELEASE_TAG"]
+          if actual_tag != expected_tag:
+              raise SystemExit(
+                  f"Tag {actual_tag!r} does not match package version {version!r}; "
+                  f"expected {expected_tag!r}."
+              )
+          PY
+
+      - name: Build distributions
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-dists
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/hangman-p
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v8
+        with:
+          name: release-dists
+          path: dist/
+
+      - name: Publish distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
