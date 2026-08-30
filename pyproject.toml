@@ -1,6 +1,6 @@
 [project]
 name = "hangman-p"
-version = "0.1.5"
+version = "0.1.6"
 description = "A command-line Hangman game."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -27,6 +27,9 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 hangman-p = "hangman_p.project:main"
+
+[tool.setuptools]
+packages = ["hangman_p"]
 
 [tool.setuptools.package-data]
 hangman_p = ["dictionary.txt"]
