@@ -1,5 +1,7 @@
 # Hangman
 
+[![CI](https://github.com/VanPaitin/hangman-p/actions/workflows/pylint.yml/badge.svg)](https://github.com/VanPaitin/hangman-p/actions/workflows/pylint.yml)
+
 #### Video Demo: &nbsp; &nbsp; _[CS50P Final project demo](https://youtu.be/2FduPPZd-YU)_
 
 ### Description
@@ -8,6 +10,10 @@
 Players attempt to guess a hidden word one letter at a time before running out of chances. The game supports multiple difficulty levels, game persistence (saving and loading games), and multiplayer challenge mode.
 
 This project demonstrates concepts such as object-oriented design, input validation, persistence using pickle, modular architecture, and automated testing with pytest.
+
+### Demo
+
+![Hangman terminal demo](https://raw.githubusercontent.com/VanPaitin/hangman-p/main/hangman.gif)
 
 ### Features
 * Three difficulty levels with different word lengths
