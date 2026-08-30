@@ -1,6 +1,7 @@
 # Hangman
 
 [![CI](https://github.com/VanPaitin/hangman-p/actions/workflows/pylint.yml/badge.svg)](https://github.com/VanPaitin/hangman-p/actions/workflows/pylint.yml)
+[![Downloads](https://static.pepy.tech/badge/hangman-p)](https://pepy.tech/project/hangman-p)
 
 ## Description
 
